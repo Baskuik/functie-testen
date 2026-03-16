@@ -14,7 +14,10 @@ class CreateLabel extends CreateRecord
     {
         // Automatisch wiki_id genereren op basis van label_name (als slug)
         $data['wiki_id'] = Str::slug($data['label_name']);
-
+    
+        // Zorg dat label_active altijd een boolean waarde heeft
+        $data['label_active'] = $data['label_active'] ?? true;
+    
         return $data;
     }
 }

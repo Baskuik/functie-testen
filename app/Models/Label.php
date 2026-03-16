@@ -10,4 +10,8 @@ class Label extends Model
         'label_name', 'wiki_id', 'conn_id', 'labelable_id', 
         'labelable_type', 'label_position', 'parent_id', 'label_active'
     ];
+
+    protected $casts = [
+        'label_active' => 'boolean',
+    ];
 }
