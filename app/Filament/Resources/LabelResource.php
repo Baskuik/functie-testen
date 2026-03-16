@@ -41,16 +41,16 @@ class LabelResource extends Resource
                 Tables\Columns\TextColumn::make('label_name')->searchable(),
                 Tables\Columns\TextColumn::make('label_active')
                     ->label('Actief')
-                    ->formatStateUsing(fn (bool|null $state): string => match ($state) {
-                        true  => 'Ja',
-                        false => 'Nee',
-                        null  => 'Nog niet ingevuld',
+                    ->formatStateUsing(fn ($state): string => match (true) {
+                        (bool) $state === true  => 'Ja',
+                        (bool) $state === false => 'Nee',
+                        default                 => 'Nog niet ingevuld',
                     })
                     ->badge()
-                    ->color(fn (bool|null $state): string => match ($state) {
-                        true  => 'success',
-                        false => 'danger',
-                        null  => 'gray',
+                    ->color(fn ($state): string => match (true) {
+                        (bool) $state === true  => 'success',
+                        (bool) $state === false => 'danger',
+                        default                 => 'gray',
                     }),
             ])
             ->actions([Tables\Actions\EditAction::make()])
