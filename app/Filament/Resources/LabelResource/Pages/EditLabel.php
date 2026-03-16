@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Labels\Pages;
+namespace App\Filament\Resources\LabelResource\Pages;
 
-use App\Filament\Resources\Labels\LabelResource;
-use Filament\Actions\DeleteAction;
+use App\Filament\Resources\LabelResource;
 use Filament\Resources\Pages\EditRecord;
 
 class EditLabel extends EditRecord
@@ -13,7 +12,7 @@ class EditLabel extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            \Filament\Actions\DeleteAction::make(),
         ];
     }
 }

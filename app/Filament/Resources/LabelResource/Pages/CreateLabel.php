@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Labels\Pages;
+namespace App\Filament\Resources\LabelResource\Pages;
 
-use App\Filament\Resources\Labels\LabelResource;
+use App\Filament\Resources\LabelResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateLabel extends CreateRecord
