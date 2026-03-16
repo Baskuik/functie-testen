@@ -20,7 +20,7 @@ class LabelResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
+        return $form 
             ->schema([
                 Forms\Components\Section::make() // Card is in v3/v5 vaak Section
                     ->schema([
