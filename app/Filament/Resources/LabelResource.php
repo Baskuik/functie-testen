@@ -35,7 +35,19 @@ class LabelResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('label_name')->searchable(),
-                Tables\Columns\IconColumn::make('label_active')->boolean(),
+                Tables\Columns\TextColumn::make('label_active')
+    ->label('Actief')
+    ->formatStateUsing(fn (bool|null $state): string => match ($state) {
+        true => 'Ja',
+        false => 'Nee',
+        null => 'Nog niet ingevuld',
+    })
+    ->badge() // Optioneel: maakt er een mooi labeltje van
+    ->color(fn (bool|null $state): string => match ($state) {
+        true => 'success',
+        false => 'danger',
+        null => 'gray',
+    }),
             ])
             ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
