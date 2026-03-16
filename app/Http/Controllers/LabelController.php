@@ -15,7 +15,7 @@ class LabelController extends Controller
         $validated = $request->validate([
             'label_name' => 'required|string|max:255',
             'wiki_id' => 'nullable|string',
-            'label_active' => 'boolean',
+            'label_active' => 'nullable|in:ja,nee',
         ]);
 
         Label::create($validated);
