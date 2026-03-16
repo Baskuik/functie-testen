@@ -23,6 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+-        //
++        Schema::table('labels', function (Blueprint $table) {
++            $table->boolean('label_active')->nullable(false)->default(true)->change();
++        });
     }
 };
