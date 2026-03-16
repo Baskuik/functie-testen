@@ -8,7 +8,7 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Schema; // We gebruiken Schema om de error te omzeilen
+use Filament\Schemas\Schema;
 use BackedEnum;
 
 class LabelResource extends Resource
@@ -16,7 +16,6 @@ class LabelResource extends Resource
     protected static ?string $model = Label::class;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    // We veranderen Form naar Schema zoals de error aangaf
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -26,6 +25,11 @@ class LabelResource extends Resource
                         Forms\Components\TextInput::make('label_name')
                             ->label('Label Naam')
                             ->required(),
+                        Forms\Components\Toggle::make('label_active')
+                            ->label('Actief')
+                            ->onLabel('Ja')
+                            ->offLabel('Nee')
+                            ->default(true),
                     ])
             ]);
     }
@@ -36,18 +40,18 @@ class LabelResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('label_name')->searchable(),
                 Tables\Columns\TextColumn::make('label_active')
-    ->label('Actief')
-    ->formatStateUsing(fn (bool|null $state): string => match ($state) {
-        true => 'Ja',
-        false => 'Nee',
-        null => 'Nog niet ingevuld',
-    })
-    ->badge() // Optioneel: maakt er een mooi labeltje van
-    ->color(fn (bool|null $state): string => match ($state) {
-        true => 'success',
-        false => 'danger',
-        null => 'gray',
-    }),
+                    ->label('Actief')
+                    ->formatStateUsing(fn (bool|null $state): string => match ($state) {
+                        true  => 'Ja',
+                        false => 'Nee',
+                        null  => 'Nog niet ingevuld',
+                    })
+                    ->badge()
+                    ->color(fn (bool|null $state): string => match ($state) {
+                        true  => 'success',
+                        false => 'danger',
+                        null  => 'gray',
+                    }),
             ])
             ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
@@ -56,9 +60,9 @@ class LabelResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLabels::route('/'),
+            'index'  => Pages\ListLabels::route('/'),
             'create' => Pages\CreateLabel::route('/create'),
-            'edit' => Pages\EditLabel::route('/{record}/edit'),
+            'edit'   => Pages\EditLabel::route('/{record}/edit'),
         ];
     }
 }
